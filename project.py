@@ -1,27 +1,21 @@
 import tkinter as tk
 from cryptography.fernet import Fernet
 
-# key made
-key = Fernet.generate_key()
-cipher = Fernet(key)
-with open('secret.key', 'wb') as key_file:
-    key_file.write(key) 
-# key made end   
-
 def submiten():
     fileToget = entryaskfile.get()
     fileTosave = entryaskloc.get()
     try:
-        with open('secret.key', 'rb') as key_file:
-            key = key_file.read()
+        key = Fernet.generate_key()
         cipher = Fernet(key)
-        with open(fileToget, 'rb') as f:
+        with open(f'{fileTosave}\\secret.key', 'wb') as key_file:
+            key_file.write(key)
+        with open(f'{fileToget}', 'rb') as f:
             file_data = f.read()
         encrypted_data = cipher.encrypt(file_data)
-        with open(fileTosave, 'wb') as f:
+        with open(f'{fileTosave}\\EncryptedFile.txt', 'wb') as f:
             f.write(encrypted_data)
-        labelendone.config(text = f'File encrypted successfully in {fileTosave}!')
-        labelendone.place(x = 450,y = 480)      
+        labelendone.config(text = f'File encrypted successfully in {fileTosave}\\EncryptedFile.txt !')
+        labelendone.place(x = 380,y = 480)      
     except Exception as e:
         print(f"Error during encryption: {e}")
     
@@ -29,33 +23,43 @@ def submitde():
     fileToget = entryaskfile.get()
     fileTosave = entryaskloc.get()
     try:
-        with open('secret.key', 'rb') as key_file:
+        with open(f'{fileToget}\\secret.key', 'rb') as key_file:
             key = key_file.read()
         cipher = Fernet(key)
-        with open(fileToget, 'rb') as f:
+        with open(f'{fileToget}\\EncryptedFile.txt', 'rb') as f:
             encrypted_data = f.read()
         decrypted_data = cipher.decrypt(encrypted_data)
         with open(fileTosave, 'wb') as f:
             f.write(decrypted_data)
         labeldedone.config(text = f"File decrypted successfully in {fileTosave}")
-        labeldedone.place(x = 450,y = 480)    
+        labeldedone.place(x = 380,y = 480)    
     except Exception as e:
         print(f"Error during decryption: {e}")
 
 def encryption():
+    entryaskfile.delete(0, tk.END)
+    entryaskloc.delete(0, tk.END)
+    labelaskfile.config(text = "File location")
     labelaskfile.place(x = 450,y = 200)
+    labelaskloc.config(text = "Folder location to save ?")
     labelaskloc.place(x = 450,y = 300)
     entryaskfile.place(x = 450,y = 250)
     entryaskloc.place(x = 450, y = 350)
     buttonen.place(x = 560, y = 405)
+    labelendone.place_forget()
     labeldedone.place_forget()
     
 def decryption():
+    entryaskfile.delete(0, tk.END)
+    entryaskloc.delete(0, tk.END)
+    labelaskfile.config(text = "Folder location")
     labelaskfile.place(x = 450,y = 200)
+    labelaskloc.config(text = "File location to save ?")
     labelaskloc.place(x = 450,y = 300)
     entryaskfile.place(x = 450,y = 250)
     entryaskloc.place(x = 450, y = 350)
     buttonde.place(x = 560, y = 405)
+    labeldedone.place_forget()
     labelendone.place_forget()
 
 # window strt
@@ -68,7 +72,6 @@ window.config(background='black')
 
 label_image = tk.PhotoImage(file="D:/Tinkercad/extra/1335179.png")
 label_image = label_image.subsample(50, 50) 
-
 
 labelside = tk.Label(window,
                 bg='white',
@@ -130,7 +133,7 @@ labelaskfile = tk.Label(window,
                     )
 
 labelaskloc = tk.Label(window,
-                    text = "Where to save",
+                    text = "Folder location to save ?",
                     font = ('Arial',20,'bold'),
                     fg = '#00FF00',
                     bg = 'black'
@@ -161,7 +164,6 @@ buttonde = tk.Button(window,text = "SUBMIT",
                     relief = 'raised',
                     borderwidth=3,
                     activebackground='#00FF00',activeforeground='white')
-
 
 window.mainloop()
 # window end
