@@ -20,17 +20,11 @@ def submiten():
         encrypted_data = cipher.encrypt(file_data)
         with open(fileTosave, 'wb') as f:
             f.write(encrypted_data)
-        labelendone = tk.Label(window,
-                        text = f'File encrypted successfully in {fileTosave}!',
-                        font = ('Arial',20,'bold'),
-                        fg = '#00FF00',
-                        bg = 'black',
-                        )
-        labelendone.place(x = 450,y = 480)
+        labelendone.config(text = f'File encrypted successfully in {fileTosave}!')
+        labelendone.place(x = 450,y = 480)      
     except Exception as e:
         print(f"Error during encryption: {e}")
     
-
 def submitde():
     fileToget = entryaskfile.get()
     fileTosave = entryaskloc.get()
@@ -43,14 +37,8 @@ def submitde():
         decrypted_data = cipher.decrypt(encrypted_data)
         with open(fileTosave, 'wb') as f:
             f.write(decrypted_data)
-        
-        labeldedone = tk.Label(window,
-                        text = f'File decrypted successfully in {fileTosave}!',
-                        font = ('Arial',20,'bold'),
-                        fg = '#00FF00',
-                        bg = 'black',
-                        )
-        labeldedone.place(x = 450,y = 480)
+        labeldedone.config(text = f"File decrypted successfully in {fileTosave}")
+        labeldedone.place(x = 450,y = 480)    
     except Exception as e:
         print(f"Error during decryption: {e}")
 
@@ -60,13 +48,15 @@ def encryption():
     entryaskfile.place(x = 450,y = 250)
     entryaskloc.place(x = 450, y = 350)
     buttonen.place(x = 560, y = 405)
-
+    labeldedone.place_forget()
+    
 def decryption():
     labelaskfile.place(x = 450,y = 200)
     labelaskloc.place(x = 450,y = 300)
     entryaskfile.place(x = 450,y = 250)
     entryaskloc.place(x = 450, y = 350)
     buttonde.place(x = 560, y = 405)
+    labelendone.place_forget()
 
 # window strt
 window = tk.Tk()
@@ -79,12 +69,28 @@ window.config(background='black')
 label_image = tk.PhotoImage(file="D:/Tinkercad/extra/1335179.png")
 label_image = label_image.subsample(50, 50) 
 
+
 labelside = tk.Label(window,
                 bg='white',
                 width = 47,
                 height = 50,
                 )
 labelside.place(x = 0,y = 0)
+
+labeldedone = tk.Label(window,
+                        text = '',
+                        font = ('Arial',20,'bold'),
+                        fg = '#00FF00',
+                        bg = 'black',
+                        )
+
+labelendone = tk.Label(window,
+                        text = '',
+                        font = ('Arial',20,'bold'),
+                        fg = '#00FF00',
+                        bg = 'black',
+                        )    
+labelendone.place(x = 450,y = 480)
 
 labellogo = tk.Label(window,
                 text = "LOGO",
@@ -155,6 +161,8 @@ buttonde = tk.Button(window,text = "SUBMIT",
                     relief = 'raised',
                     borderwidth=3,
                     activebackground='#00FF00',activeforeground='white')
+
+
 window.mainloop()
 # window end
 
