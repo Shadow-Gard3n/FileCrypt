@@ -80,14 +80,14 @@ def help():
 
 # window strt
 window = tk.Tk()
-icon_image = tk.PhotoImage(file="D:/Tinkercad/extra/1335179.png")
+icon_image = tk.PhotoImage(file="logo.png")
 window.iconphoto(True, icon_image)
 window.title("FileCrypt")
 window.geometry("1920x1080")
 window.config(background='black')
 
-label_image = tk.PhotoImage(file="D:/Tinkercad/extra/1335179.png")
-label_image = label_image.subsample(50, 50) 
+label_image = tk.PhotoImage(file="logo.png")
+label_image = label_image.subsample(3, 3) 
 
 labelside = tk.Label(window,
                 bg='white',
@@ -185,8 +185,6 @@ For Decryption:
                     fg = '#00FF00',
                     bg = 'black'
                     )
-
-
 
 entryaskfile = tk.Entry(window, 
                     font = ('Arial',20),
