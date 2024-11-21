@@ -18,7 +18,7 @@ def submiten():
         labelendone.place(x = 380,y = 480)      
     except Exception as e:
         print(f"Error during encryption: {e}")
-    
+
 def submitde():
     fileToget = entryaskfile.get()
     fileTosave = entryaskloc.get()
@@ -48,6 +48,8 @@ def encryption():
     buttonen.place(x = 560, y = 405)
     labelendone.place_forget()
     labeldedone.place_forget()
+    labelfilecrypt.place_forget()
+    labeltext.place_forget()
     
 def decryption():
     entryaskfile.delete(0, tk.END)
@@ -61,12 +63,26 @@ def decryption():
     buttonde.place(x = 560, y = 405)
     labeldedone.place_forget()
     labelendone.place_forget()
+    labelfilecrypt.place_forget()
+    labeltext.place_forget()
+
+def help():
+    entryaskfile.place_forget()
+    entryaskloc.place_forget()
+    labelaskfile.place_forget()
+    labelaskloc.place_forget()
+    buttonde.place_forget()
+    buttonen.place_forget()
+    labeldedone.place_forget()
+    labelendone.place_forget()
+    labelfilecrypt.place(x = 350,y = 20)
+    labeltext.place(x = 350,y = 80)
 
 # window strt
 window = tk.Tk()
 icon_image = tk.PhotoImage(file="D:/Tinkercad/extra/1335179.png")
 window.iconphoto(True, icon_image)
-window.title("GUI")
+window.title("FileCrypt")
 window.geometry("1920x1080")
 window.config(background='black')
 
@@ -96,7 +112,7 @@ labelendone = tk.Label(window,
 labelendone.place(x = 450,y = 480)
 
 labellogo = tk.Label(window,
-                text = "LOGO",
+                text = "FILECRYPT",
                 font = ('Arial',30,'bold'),
                 fg = 'black',
                 bg='white',
@@ -105,7 +121,7 @@ labellogo = tk.Label(window,
                 padx = 30,
                 pady = 5,
                 )
-labellogo.place(x = 50, y = 0)
+labellogo.place(x = 40, y = 0)
 
 buttonencrypt = tk.Button(window, text = "ENCRYPTION",
                         font = ("Comic Sans",20,'bold'),
@@ -139,6 +155,39 @@ labelaskloc = tk.Label(window,
                     bg = 'black'
                     )
 
+labelfilecrypt = tk.Label(window,
+                    text = "WELCOME TO FILECRYPT",
+                    font = ('Arial',30,'bold'),
+                    fg = '#00FF00',
+                    bg = 'black'
+                    )
+
+labeltext = tk.Label(window,
+                    text = """
+For Encryption:
+    1. Click on Encryption button.
+    2. Type the location of file you need to encrypt in File location.
+        Example: "D:\\Folder\\Filename.txt"
+    3. Type the Folder location where you want to put encrypted file with 
+        secret key in Folder location.
+    4. Your encrypted file can be found in that folder location.
+
+For Decryption:
+    1. Click on Decryption button.
+    2. Type the location of folder which contains secret key and Encrypted 
+        file together in Folder location.
+    3. Type the File location where you want to put decrypted file in File 
+        location.
+    4. Your decrypted file can be found in that file location.
+""",
+                    font = ('Arial',18,'bold'),
+                    justify="left",  
+                    fg = '#00FF00',
+                    bg = 'black'
+                    )
+
+
+
 entryaskfile = tk.Entry(window, 
                     font = ('Arial',20),
                     fg = 'black',
@@ -164,6 +213,15 @@ buttonde = tk.Button(window,text = "SUBMIT",
                     relief = 'raised',
                     borderwidth=3,
                     activebackground='#00FF00',activeforeground='white')
+
+buttonhelp = tk.Button(window, text = "HELP",
+                        font = ("Comic Sans",20,'bold'),
+                        fg = 'black',bg = '#00FF00',
+                        width = 19,
+                        command = help,
+                        borderwidth=3,
+                        activebackground='black',activeforeground='#00FF00')
+buttonhelp.place(x = 0,y = 550)
 
 window.mainloop()
 # window end
